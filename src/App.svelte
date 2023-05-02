@@ -1,6 +1,7 @@
 <script>
 	import Login from "./Login.svelte";
 	import {onMount, setContext } from "svelte";
+	import Event from "./event.svelte";
 
 	import {
 		key as userContextKey,
@@ -21,7 +22,14 @@
 			resolve();
 		}, 1000);
 	});
+
+	function handleMessage(event) {
+		alert(event.detail.text)
+	}
 </script>
+
+<h1>An event listener. Click to test.</h1>
+<Event on:message={handleMessage} />
 
 <section>
 	<Login {submit} />
