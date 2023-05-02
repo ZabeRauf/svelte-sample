@@ -1,39 +1,40 @@
 <script>
-	export let name;
+	import Login from "./Login.svelte";
+	import {onMount, setContext } from "svelte";
+
+	import {
+		key as userContextKey,
+		initialValue as userContextInitialValue
+	} from "./userContext";
+ 
+	onMount(() => {
+		setContext(userContextKey, userContextInitialValue);
+	});
+	const submit = ({ email, password }) =>
+		new Promise((resolve, reject) => {
+		setTimeout(() => {
+			setContext(userContextKey, {
+			name: "Zooben",
+			lastName: "McDooben",
+			email: "rauf.zabe@gmail.com"
+			});
+			resolve();
+		}, 1000);
+	});
 </script>
 
-<main>
-	<!-- signup form -->
-	<h2>Signup</h2>
-	<form class="signup">
-		<label for="email">Email:</label>
-		<input type="email" name="email">
-		<label for="password">Password:</label>
-		<input type="password" name="password">
-		<button>Signup</button>
-	</form>
-
-	<!-- login form -->
-	<h2>Login</h2>
-	<form class="login">
-		<label for="email">Email:</label>
-		<input type="email" name="email">
-		<label for="password">Password:</label>
-		<input type="password" name="password">
-		<button>Login</button>
-	</form>
-
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
-	<button class="logout">Logout</button>
-</main>
+<section>
+	<Login {submit} />
+</section>
 
 <style>
-	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
+	section {
+		height: 100vh;
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background: url(https://www.freecodecamp.org/news/content/images/size/w2000/2022/09/jonatan-pie-3l3RwQdHRHg-unsplash.jpg);
 	}
 
 	h1 {
